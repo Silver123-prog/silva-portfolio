@@ -45,7 +45,7 @@
     nav { display: flex; gap: 1.25rem; }
     nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
     nav a:hover { color: var(--ink); }
-    .btn { display: inline-block; font: inherit; font-weight: 700; text-decoration: none; padding: .7rem 1.2rem; border-radius: 10px; border: 1.5px solid transparent; transition: transform .12s, filter .15s; }
+    .btn { display: inline-block; background: transparent; cursor: pointer; font: inherit; font-weight: 700; text-decoration: none; padding: .7rem 1.2rem; border-radius: 10px; border: 1.5px solid transparent; transition: transform .12s, filter .15s; }
     .btn:hover { filter: brightness(1.08); }
     .btn:active { transform: translateY(1px); }
     .btn-primary { background: var(--primary); color: var(--on-primary); }
@@ -106,6 +106,7 @@
     #contact h2 { font-size: clamp(2rem, 5vw, 3.4rem); max-width: 18ch; }
     #contact p { color: var(--on-deep-muted); margin-block: 1rem 1.8rem; max-width: 48ch; }
     #contact .btn-primary { background: var(--amber); color: #2b1d00; }
+    #contact .btn-light { background: var(--on-deep); color: var(--deep); border-color: var(--on-deep); }
     #contact .btn-line { border-color: #ffffff55; color: var(--on-deep); }
     #contact .btn-line:hover { background: #ffffff14; }
     #contact .email-line { margin-block: 0 1.8rem; max-width: none; }
@@ -182,7 +183,7 @@
       <div class="wrap">
         <h2>Have a project in mind?</h2>
         <p id="contactText"></p>
-        <p class="email-line"><a id="emailLink" href="#"></a></p>
+        <p class="email-line" id="emailLine" aria-live="polite" hidden><a id="emailLink" href="#"></a></p>
         <div class="actions" id="contactLinks"></div>
       </div>
     </section>
@@ -314,15 +315,25 @@
       [site.whatsapp, "WhatsApp", "btn btn-line"],
     ].filter((l) => l[0]);
     $("contactLinks").innerHTML =
-      `<button class="btn btn-line" id="copyEmail" type="button">Copy email</button>` +
+      `<button class="btn btn-light" id="emailBtn" type="button">Show my email</button>` +
       links.map(([href, label, cls]) =>
         `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noreferrer">${esc(label)}</a>`).join("");
-    $("copyEmail").addEventListener("click", async (e) => {
+
+    // The address stays hidden until someone asks for it. After that, the button copies it.
+    let revealed = false;
+    const reveal = () => {
+      revealed = true;
+      $("emailLine").hidden = false;
+      $("emailBtn").textContent = "Copy email";
+    };
+    $("emailBtn").addEventListener("click", async (e) => {
       const btn = e.currentTarget;
+      if (!revealed) return reveal();
       try { await navigator.clipboard.writeText(site.email); btn.textContent = "Copied!"; }
       catch { btn.textContent = "Copy it from above"; }
       setTimeout(() => (btn.textContent = "Copy email"), 2000);
     });
+    $("heroEmail").addEventListener("click", reveal);
 
     $("footer").textContent = `© ${new Date().getFullYear()} ${site.name}`;
   </script>
