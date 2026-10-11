@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Silva | Web Developer in Lagos</title>
+  <title>Silva | Web Developer</title>
   <meta name="description" content="Silva builds fast, mobile-friendly business websites, WordPress stores and React apps for clients worldwide." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚓</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -201,7 +201,7 @@
     const site = {
       name: "Silva",                          // CHANGE ME: your name or brand
       role: "Web developer",
-      // location: "Lagos, Nigeria",
+      location: "",
       rate: "From $25/hr",                    // CHANGE ME or set to "" to hide
       photo: "",                              // optional: "photo.jpg" (put the file next to index.html)
       availability: "Open to new projects",   // CHANGE ME, e.g. "Booked until November"
@@ -258,7 +258,7 @@
     };
     const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-    document.title = `${site.name} | ${site.role} in ${site.location.split(",")[0]}`;
+    document.title = `${site.name} | ${site.role}`;
     $("logo").innerHTML =
       (site.photo ? `<span class="logo-mark"><img src="${esc(site.photo)}" alt="" /></span>` : `<span class="logo-mark" aria-hidden="true">⚓</span>`) +
       `<span>${esc(site.name)}</span>`;
