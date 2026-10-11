@@ -201,12 +201,12 @@
     const site = {
       name: "Silva",                          // CHANGE ME: your name or brand
       role: "Web developer",
-      location: "Lagos, Nigeria",
+      // location: "Lagos, Nigeria",
       rate: "From $25/hr",                    // CHANGE ME or set to "" to hide
       photo: "",                              // optional: "photo.jpg" (put the file next to index.html)
       availability: "Open to new projects",   // CHANGE ME, e.g. "Booked until November"
       headline: "Websites that load fast and work on every phone.",
-      intro: "I'm a web developer in Lagos. I build business websites, WordPress stores and React apps for clients who want something clear, quick and easy to manage.",
+      intro: "I build business websites, WordPress stores and React apps for clients who want something clear, quick and easy to manage.",
       email: "adebayomikky1@gmail.com",
       upwork: "https://www.upwork.com/freelancers/~01cd488ff1943764b0?mp_source=share",
       github: "https://github.com/Silver123-prog",
@@ -269,7 +269,7 @@
     $("cardRole").textContent = site.role;
     $("avatar").innerHTML = site.photo ? `<img src="${esc(site.photo)}" alt="Portrait of ${esc(site.name)}" />` : esc(site.name[0]);
 
-    const facts = [["Based in", site.location], ["Rate", site.rate], ["Works with", "Clients worldwide"]].filter((f) => f[1]);
+    const facts = [["Rate", site.rate], ["Works with", "Clients worldwide"]].filter((f) => f[1]);
     $("facts").innerHTML = facts.map(([k, v]) => `<li><span>${esc(k)}</span><span>${esc(v)}</span></li>`).join("");
 
     // Built-in preview of Harbor (ring + bars) used when no screenshot is given
